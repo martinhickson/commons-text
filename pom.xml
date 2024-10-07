@@ -23,7 +23,7 @@
     <version>64</version>
   </parent>
   <artifactId>commons-text</artifactId>
-  <version>1.11.0</version>
+  <version>1.11.1</version>
   <name>Apache Commons Text</name>
   <description>Apache Commons Text is a library focused on algorithms working on strings.</description>
   <url>https://commons.apache.org/proper/commons-text</url>
@@ -224,6 +224,32 @@
             </manifestEntries>
           </archive>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <artifactSet>
+                  <includes>
+                      <include>org.apache.commons:commons-lang3</include>
+                  </includes>
+                </artifactSet>
+                <relocations>
+                  <relocation>
+                    <pattern>org.apache.commons.lang3</pattern>
+                    <shadedPattern>shaded.org.apache.commons.lang3</shadedPattern>
+                  </relocation>
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
